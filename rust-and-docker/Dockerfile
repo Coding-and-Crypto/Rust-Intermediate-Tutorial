@@ -1,6 +1,7 @@
 FROM rust:1.58
 
-RUN cargo new rust-and-docker
+RUN cargo new --bin rust-and-docker
+WORKDIR ./rust-and-docker
 COPY Cargo.toml Cargo.toml
 COPY src src
 RUN cargo build
