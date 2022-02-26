@@ -1,4 +1,4 @@
-FROM rust:1.58 as builder
+FROM rust:slim-buster as builder
 
 RUN cargo new --bin rust-and-docker
 WORKDIR ./rust-and-docker
