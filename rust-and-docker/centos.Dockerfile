@@ -6,7 +6,6 @@ COPY ./Cargo.toml ./Cargo.toml
 COPY ./src ./src
 RUN cargo build --release
 
-FROM alpine:latest
-USER root
+FROM centos:latest
 COPY --from=builder /rust-and-docker/target/release/rust-and-docker ./rust-and-docker
-ENTRYPOINT [ "./rust-and-docker" ]
+CMD ["./rust-and-docker"]
