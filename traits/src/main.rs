@@ -1,7 +1,7 @@
 
 pub trait Vehicle {
-    fn forward() -> String;
-    fn backward() -> String;
+    fn forward(&self) -> String;
+    fn backward(&self) -> String;
 }
 
 pub struct Truck {
@@ -13,11 +13,20 @@ pub struct Car {
 }
 
 impl Vehicle for Truck {
-    fn forward() -> String {
-        String::from("Driving my car forward!")
+    fn forward(&self) -> String {
+        String::from(format!("Driving my {} truck forward!", self.color))
     }
-    fn backward() -> String {
-        String::from("Backing my car up...")
+    fn backward(&self) -> String {
+        String::from(format!("Backing my {} truck up...", self.color))
+    }
+}
+
+impl Vehicle for Car {
+    fn forward(&self) -> String {
+        String::from(format!("Driving my {} car forward!", self.color))
+    }
+    fn backward(&self) -> String {
+        String::from(format!("Backing my {} car up...", self.color))
     }
 }
 
