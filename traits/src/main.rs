@@ -32,5 +32,10 @@ impl Vehicle for Car {
 
 
 fn main() {
-    println!("Hello, world!");
+    let my_truck = Truck { color: String::from("green") };
+    let my_car = Car { color: String::from("red") };
+    println!("{}", my_car.forward());
+    println!("{}", my_car.backward());
+    println!("{}", my_truck.forward());
+    println!("{}", my_truck.backward());
 }
