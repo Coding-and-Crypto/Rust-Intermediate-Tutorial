@@ -1,4 +1,4 @@
-FROM rust:alpine3.14 as builder
+FROM rust:1.58 as builder
 
 RUN cargo new --bin rust-and-docker
 WORKDIR ./rust-and-docker
