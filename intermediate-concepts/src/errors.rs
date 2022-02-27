@@ -2,7 +2,7 @@
 use std::process::Command;
 
 // Linux only
-fn error_handling_example(dir: &str) {
+fn error_handling_example_1(dir: &str) {
 
     println!("\n\n");
 
@@ -16,7 +16,27 @@ fn error_handling_example(dir: &str) {
     println!("\n\n");
 }
 
+// Linux only
+fn error_handling_example_2(dir: &str) {
+
+    println!("\n\n");
+
+    let mut list_cmd = Command::new("ls");
+
+    let x = match list_cmd.current_dir(dir).status() {
+        Ok(cmd) => Some(cmd),
+        Err(e) => {
+            println!("Directory not found!");
+            None
+        },
+    };
+
+    println!("\n\n");
+}
+
 fn main() {
-    error_handling_example("src");
-    error_handling_example("lib");
+    error_handling_example_1("src");
+    error_handling_example_1("lib");
+    error_handling_example_2("src");
+    error_handling_example_2("lib");
 }
