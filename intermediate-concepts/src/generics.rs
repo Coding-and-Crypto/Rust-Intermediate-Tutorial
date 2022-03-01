@@ -1,6 +1,4 @@
 
-// Generics
-
 // enum Option<T> {
 //     Some(T),
 //     None,
@@ -32,17 +30,19 @@ fn error_handling_example_1(dir: &str) {
     println!("\n\n");
 }
 
+enum Custom<T, U> {
+    EXAMPLE(T),
+    SAMPLE(U),
+}
 
 
-// In Structs
+// Structs
 
-// You can enforce the same type
 struct Rectangle<T> {
     height: T,
     width: T,
 }
 
-// Or different ones
 struct Cube<T, U, V> {
     height: T,
     width: U,
@@ -50,27 +50,28 @@ struct Cube<T, U, V> {
 }
 
 fn struct_example() {
-    
+
     let rect1 = Rectangle{height: 1, width: 2};
-    let rect2 = Rectangle{height: 1.65, width: 2.22};
+    let rect1 = Rectangle{height: 1.65, width: 2.22};
 
     let cube1 = Cube{height: 1, width: 2, length: 3};
-    let cube2 = Cube{height: 1.85, width: -2, length: 3};
+    let cube1 = Cube{height: 1.54, width: 2, length: 3.75};
 }
 
 
+// Functions
 
-// In Functions
+fn sum_of_numbers<T: std::ops::Mul<Output = T>>(num1: T, num2: T) -> T {
+    num1 * num2
+}
 
 fn lookup_datatype<T>(object: T) {
     println!("{}", std::any::type_name::<T>());
 }
 
-
-fn functions_example() {
-    
-    lookup_datatype("jelly");
+fn main() {
+    println!("{}", sum_of_numbers(1, 2));
     lookup_datatype(1);
-    lookup_datatype(5.84);
-    lookup_datatype(Some(1));
+    lookup_datatype(1.96);
+    lookup_datatype("string_slice");
 }
