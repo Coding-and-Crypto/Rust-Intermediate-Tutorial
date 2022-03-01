@@ -36,6 +36,28 @@ fn error_handling_example_1(dir: &str) {
 
 // In Structs
 
+// You can enforce the same type
+struct Rectangle<T> {
+    height: T,
+    width: T,
+}
+
+// Or different ones
+struct Cube<T, U, V> {
+    height: T,
+    width: U,
+    length: V,
+}
+
+fn struct_example() {
+    
+    let rect1 = Rectangle{height: 1, width: 2};
+    let rect2 = Rectangle{height: 1.65, width: 2.22};
+
+    let cube1 = Cube{height: 1, width: 2, length: 3};
+    let cube2 = Cube{height: 1.85, width: -2, length: 3};
+}
+
 
 
 // In Functions
