@@ -1,4 +1,5 @@
 
+
 pub fn nothing_much() {
-    println!("Nothing much.");
+    println!("Nothing much!");
 }
