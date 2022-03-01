@@ -1,2 +1,4 @@
 rust-and-docker/target/
 intermediate-concepts/target/
+some_bin/target/
+some_lib/target/
