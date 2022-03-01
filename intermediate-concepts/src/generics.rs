@@ -61,3 +61,16 @@ fn struct_example() {
 
 
 // In Functions
+
+fn lookup_datatype<T>(object: T) {
+    println!("{}", std::any::type_name::<T>());
+}
+
+
+fn functions_example() {
+    
+    lookup_datatype("jelly");
+    lookup_datatype(1);
+    lookup_datatype(5.84);
+    lookup_datatype(Some(1));
+}
