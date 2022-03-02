@@ -1,6 +1,7 @@
 
 
 fn closures_example_1(number1: i32, number2: i32) -> i32 {
+    // Closure
     let new_number = |x| {
         println!("Multiplying {} by 2", x);
         x * 2
@@ -22,10 +23,9 @@ fn closures_example_2() {
 }
 
 
-
 fn main() {
     let x = closures_example_1(1, 3);
     println!("{}", x);
-    let y = closures_example_1(5, 2);
+    let y = closures_example_1(6, 3);
     println!("{}", y);
 }
