@@ -16,3 +16,15 @@ intermediate-concepts
 some_bin
 some_lib
 ```
+
+### Tutorial #7
+```shell
+some_bin
+some_lib
+intermediate-concepts (closures.rs)
+```
+
+### Tutorials #8 - #10
+```shell
+TBD
+```
