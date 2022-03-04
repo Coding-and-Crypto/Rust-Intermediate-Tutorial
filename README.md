@@ -19,12 +19,10 @@ some_lib
 
 ### Tutorial #7
 ```shell
-some_bin
-some_lib
-intermediate-concepts (closures.rs)
+intermediate-concepts
 ```
 
 ### Tutorials #8 - #10
 ```shell
-TBD
+job-board-api
 ```
