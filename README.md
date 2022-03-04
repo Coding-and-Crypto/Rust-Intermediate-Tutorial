@@ -24,5 +24,5 @@ intermediate-concepts
 
 ### Tutorials #8 - #10
 ```shell
-job-board-api
+mining-pool-api
 ```
