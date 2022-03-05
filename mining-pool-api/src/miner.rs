@@ -32,9 +32,7 @@ impl Miner {
 // List all Miners
 #[get("/miners")]
 pub async fn list_miners() -> HttpResponse {
-
     let miners = Miners { results: vec![] };
-
     HttpResponse::Ok()
         .content_type("application/json")
         .json(miners)
@@ -58,9 +56,7 @@ pub async fn get_miner(path: Path<(String,)>) -> HttpResponse {
 // List all Miners for Wallet
 #[get("/wallets/{id}/miners")]
 pub async fn list_wallet_miners(path: Path<(String,)>) -> HttpResponse {
-    // TODO find miners by wallet ID and return them
     let miners = Miners { results: vec![] };
-
     HttpResponse::Ok()
         .content_type("application/json")
         .json(miners)
@@ -69,9 +65,7 @@ pub async fn list_wallet_miners(path: Path<(String,)>) -> HttpResponse {
 // Create new Miner
 #[post("/wallets/{id}/miners")]
 pub async fn create_miner(path: Path<(String,)>) -> HttpResponse {
-    // TODO add one miner to a wallet
     let miner = Miner::new();
-
     HttpResponse::Created()
         .content_type("application/json")
         .json(miner)

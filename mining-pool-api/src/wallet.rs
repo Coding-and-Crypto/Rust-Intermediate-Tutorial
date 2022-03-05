@@ -51,9 +51,7 @@ impl WalletRequest {
 // List all Wallets
 #[get("/wallets")]
 pub async fn list_wallets() -> HttpResponse {
-
     let wallets = Wallets { results: vec![] };
-
     HttpResponse::Ok()
         .content_type("application/json")
         .json(wallets)
