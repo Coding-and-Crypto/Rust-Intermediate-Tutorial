@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::miner::Miner;
-use crate::Response;
+use crate::config::Response;
 
 
 pub type Wallets = Response<Wallet>;
@@ -13,32 +13,36 @@ pub type Wallets = Response<Wallet>;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Wallet {
-    pub id: String,
-    pub joined: DateTime<Utc>,
-    pub club: String,
-    pub shares: Vec<Miner>,
+    pub address: String,
+    pub club_name: String,
+    pub workers_online: i32,
+    pub shares_mined: Vec<Miner>,
+    pub date_joined: DateTime<Utc>,
 }
 
 impl Wallet {
-    pub fn new(club: String) -> Self {
+    pub fn new(club_name: String) -> Self {
         Self {
-            id: Uuid::new_v4().to_string(),
-            joined: Utc::now(),
-            club,
-            shares: vec![],
+            address: Uuid::new_v4().to_string(),
+            club_name,
+            workers_online: 0,
+            shares_mined: vec![],
+            date_joined: Utc::now(),
         }
     }
 }
 
+// ------------------------------------------------------
+
 #[derive(Debug, Deserialize, Serialize)]
 pub struct WalletRequest {
-    pub club: Option<String>,
+    pub club_name: Option<String>,
 }
 
 impl WalletRequest {
     pub fn to_wallet(&self) -> Option<Wallet> {
-        match &self.club {
-            Some(club) => Some(Wallet::new(club.to_string())),
+        match &self.club_name {
+            Some(club_name) => Some(Wallet::new(club_name.to_string())),
             None => None,
         }
     }

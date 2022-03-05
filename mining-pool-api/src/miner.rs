@@ -4,7 +4,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-use crate::Response;
+use crate::config::Response;
 
 
 pub type Miners = Response<Miner>;
@@ -13,17 +13,21 @@ pub type Miners = Response<Miner>;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Miner {
     pub id: String,
-    pub created_at: DateTime<Utc>,
+    pub nickname: String,
+    pub date_joined: DateTime<Utc>,
 }
 
 impl Miner {
-    pub fn new() -> Self {
+    pub fn new(nickname: String) -> Self {
         Self {
             id: Uuid::new_v4().to_string(),
-            created_at: Utc::now(),
+            nickname,
+            date_joined: Utc::now(),
         }
     }
 }
+
+// ------------------------------------------------------
 
 // List all Miners
 #[get("/miners")]

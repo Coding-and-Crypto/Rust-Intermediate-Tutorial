@@ -3,16 +3,10 @@ extern crate actix_web;
 
 use actix_web::{middleware, App, HttpServer};
 use std::{env, io};
-use serde::{Deserialize, Serialize};
 
+mod config;
 mod miner;
 mod wallet;
-
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Response<T> {
-    pub results: Vec<T>
-}
 
 
 #[actix_rt::main]
