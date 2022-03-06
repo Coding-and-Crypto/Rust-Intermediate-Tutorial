@@ -13,7 +13,7 @@ use {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Miner {
     pub id: String,
-    pub wallet_address: String,
+    pub address: String,
     pub nickname: String,
     pub hash_rate: i32, // MH/s
     pub shares_mined: i32,
@@ -21,10 +21,10 @@ pub struct Miner {
 }
 
 impl Miner {
-    pub fn new(wallet_address: String, nickname: String) -> Self {
+    pub fn new(address: String, nickname: String) -> Self {
         Self {
             id: Uuid::new_v4().to_string(),
-            wallet_address,
+            address,
             nickname,
             hash_rate: rand::thread_rng().gen_range(20..100),
             shares_mined: rand::thread_rng().gen_range(1..50),
@@ -35,7 +35,7 @@ impl Miner {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MinerRequest {
-    wallet_address: String,
+    address: String,
     nickname: String,
 }
 
@@ -70,7 +70,7 @@ pub async fn list_wallet_miners() -> HttpResponse {
 #[post("/wallets/{id}/miners")]
 pub async fn create_miner(miner_request: Json<MinerRequest>) -> HttpResponse {
     let miner = Miner::new(
-        miner_request.wallet_address.to_string(),
+        miner_request.address.to_string(),
         miner_request.nickname.to_string(),
     ); // Fails on wallet address for now
     ResponseType::Created(miner).get_response()
