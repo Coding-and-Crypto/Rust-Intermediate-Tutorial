@@ -131,4 +131,3 @@ pub fn create_new_miner(new_miner_request: NewMinerRequest,
         Err(e) => Err(e),
     }
 }
-

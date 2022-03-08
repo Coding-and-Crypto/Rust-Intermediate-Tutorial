@@ -22,7 +22,7 @@ pub struct Wallet {
     pub total_hash_rate: i32,
     pub total_shares_mined: i32,
     pub total_workers_online: i32,
-    pub workers_online: Vec<Miner>
+    pub workers_online: Vec<Miner>,
 }
 
 impl Wallet {
@@ -35,13 +35,14 @@ impl Wallet {
 }
 
 
-// --------------- POST Request Body for new Wallet
+// --------------- POST Request Body for new Miner
 
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct NewWalletRequest {
     club_name: String,
 }
+
 
 
 // --------------- DAO Object (DB Table Records)

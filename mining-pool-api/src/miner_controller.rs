@@ -9,7 +9,6 @@ use {
 };
 
 
-
 // List all Miners
 #[get("/miners")]
 pub async fn list_miners(pool: Data<DBPool>) -> HttpResponse {
@@ -27,7 +26,7 @@ pub async fn get_miner(path: Path<(String,)>, pool: Data<DBPool>) -> HttpRespons
     match miner {
         Some(miner) => ResponseType::Ok(miner).get_response(),
         None => ResponseType::NotFound(
-            NotFoundMessage::new("Miner not found".to_string())
+            NotFoundMessage::new("Miner not found.".to_string())
         ).get_response(),
     }
 }

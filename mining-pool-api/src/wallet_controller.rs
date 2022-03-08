@@ -9,7 +9,6 @@ use {
 };
 
 
-
 // List all Wallets
 #[get("/wallets")]
 pub async fn list_wallets(pool: Data<DBPool>) -> HttpResponse {
