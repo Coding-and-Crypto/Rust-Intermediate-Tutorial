@@ -36,7 +36,7 @@ pub async fn get_wallet() -> HttpResponse {
 
 // Create New Wallet
 #[post("/wallets")]
-pub async fn create_wallet(wallet_request: Json<WalletRequest>) -> HttpResponse {
+pub async fn create_wallet(wallet_request: Json<NewWalletRequest>) -> HttpResponse {
     /* 
         TODO: Create a new WalletDAO object from requested inputs and write to DB
     */

@@ -23,7 +23,7 @@ pub struct Wallet {
 
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct WalletRequest {
+pub struct NewWalletRequest {
     club_name: String,
 }
 
