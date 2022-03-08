@@ -26,3 +26,4 @@ intermediate-concepts
 ```shell
 mining-pool-api
 ```
+Check the tags for each video! Tag `video-1` contains only the Actix and web framework stuff from Part 1, while tag `video-2` has all of the Diesel and database work.
