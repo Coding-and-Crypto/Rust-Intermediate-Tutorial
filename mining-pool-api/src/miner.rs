@@ -28,7 +28,6 @@ pub struct NewMinerRequest {
 
 // --------------- DAO Object (DB Table Records)
 
-
 pub struct MinerDAO {
     pub id: String,
     pub address: String,

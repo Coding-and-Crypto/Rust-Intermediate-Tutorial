@@ -7,7 +7,6 @@ use {
 };
 
 
-
 // List all Miners
 #[get("/miners")]
 pub async fn list_miners() -> HttpResponse {
@@ -29,7 +28,7 @@ pub async fn get_miner() -> HttpResponse {
     match miner {
         Some(miner) => ResponseType::Ok(miner).get_response(),
         None => ResponseType::NotFound(
-            NotFoundMessage::new("Miner not found".to_string())
+            NotFoundMessage::new("Miner not found.".to_string())
         ).get_response(),
     }
 }
