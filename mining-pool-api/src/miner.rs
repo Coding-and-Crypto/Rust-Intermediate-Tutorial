@@ -82,6 +82,19 @@ pub fn get_club_name(_address: Uuid, conn: &DBPooledConnection) -> String {
     }
 }
 
+pub fn fetch_all_miners(conn: &DBPooledConnection) -> Vec<Miner> {
+    use crate::schema::miners::dsl::*;
+    match miners.load::<MinerDAO>(conn) {
+        Ok(result) => {
+            result.into_iter().map(|m| {
+                let club_name = get_club_name(m.address, conn);
+                m.to_miner(club_name)
+            }).collect::<Vec<Miner>>()
+        },
+        Err(_) => vec![],
+    }
+}
+
 pub fn fetch_miner_by_id(_id: Uuid, conn: &DBPooledConnection) -> Option<Miner> {
     use crate::schema::miners::dsl::*;
     match miners.filter(id.eq(_id)).load::<MinerDAO>(conn) {
@@ -95,20 +108,6 @@ pub fn fetch_miner_by_id(_id: Uuid, conn: &DBPooledConnection) -> Option<Miner> 
             }
         },
         Err(_) => None,
-    }
-}
-
-
-pub fn fetch_all_miners(conn: &DBPooledConnection) -> Vec<Miner> {
-    use crate::schema::miners::dsl::*;
-    match miners.load::<MinerDAO>(conn) {
-        Ok(result) => {
-            result.into_iter().map(|m| {
-                let club_name = get_club_name(m.address, conn);
-                m.to_miner(club_name)
-            }).collect::<Vec<Miner>>()
-        },
-        Err(_) => vec![],
     }
 }
 
