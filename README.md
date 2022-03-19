@@ -26,11 +26,8 @@ intermediate-concepts
 ```shell
 mining-pool-api
 ```
-___
-```text
-Check the tags for each video! 
+Check the tags for each video!
 Tag `video-1` contains only the Actix and web framework stuff from Part 1.
 Tag `video-2` contains Diesel configs and service logic (read/write from db).
 Tag `video-3` contains read/write from db with JOINs and also Docker.
 `video-3 == master`
-```
