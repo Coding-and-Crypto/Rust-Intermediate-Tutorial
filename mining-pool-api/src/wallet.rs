@@ -1,14 +1,20 @@
 use {
-    diesel::{ExpressionMethods, Insertable, Queryable, RunQueryDsl},
-    diesel::query_dsl::methods::FilterDsl,
+    diesel::{
+        ExpressionMethods, 
+        Insertable, 
+        Queryable, 
+        QueryDsl, 
+        RunQueryDsl
+    },
     diesel::result::Error,
-    serde::{Deserialize, Serialize},
+    serde::{
+        Deserialize, 
+        Serialize
+    },
     uuid::Uuid,
-
     super::schema::wallets,
-
     crate::DBPooledConnection,
-    crate::miner::{Miner, MinerDAO},
+    crate::miner::*,
 };
 
 
@@ -80,6 +86,7 @@ pub fn get_workers_online(_wallet_dao: &WalletDAO, conn: &DBPooledConnection) ->
     }
 }
 
+
 pub fn fetch_all_wallets(conn: &DBPooledConnection) -> Vec<Wallet> {
     use crate::schema::wallets::dsl::*;
     match wallets.load::<WalletDAO>(conn) {
@@ -112,15 +119,10 @@ pub fn fetch_wallet_by_id(_address: Uuid, conn: &DBPooledConnection) -> Option<W
 
 pub fn create_new_wallet(new_wallet_request: NewWalletRequest, conn: &DBPooledConnection) -> Result<Wallet, Error> {
     use crate::schema::wallets::dsl::*;
-    let new_wallet = Wallet {
-        address: Uuid::new_v4().to_string(),
-        club_name: new_wallet_request.club_name.to_string(),
-        total_hash_rate: 0,
-        total_shares_mined: 0,
-        total_workers_online: 0,
-        workers_online: vec![],
+    let new_wallet_dao = WalletDAO {
+        address: Uuid::new_v4(),
+        club_name: new_wallet_request.club_name,
     };
-    let new_wallet_dao = new_wallet.to_wallet_dao();
     match diesel::insert_into(wallets).values(&new_wallet_dao).execute(conn) {
         Ok(_) => Ok(new_wallet_dao.to_wallet(vec![])),
         Err(e) => Err(e),
