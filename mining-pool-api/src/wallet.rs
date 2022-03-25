@@ -1,15 +1,22 @@
 use {
-    diesel::{ExpressionMethods, Insertable, Queryable, RunQueryDsl},
+    diesel::{
+        ExpressionMethods, 
+        Insertable, 
+        Queryable, 
+        RunQueryDsl
+    },
     diesel::query_dsl::methods::FilterDsl,
     diesel::result::Error,
-    serde::{Deserialize, Serialize},
+    serde::{
+        Deserialize, 
+        Serialize
+    },
     uuid::Uuid,
-
     super::schema::wallets,
-
     crate::DBPooledConnection,
     crate::miner::{Miner, MinerDAO},
 };
+
 
 
 // --------------- JSON Payload (REST)
@@ -108,9 +115,9 @@ pub fn fetch_wallet_by_id(_address: Uuid, conn: &DBPooledConnection) -> Option<W
                 match miners
                     .filter(crate::schema::miners::address.eq(_address))
                     .load::<MinerDAO>(conn) {
-                        Ok(result) => Some(matched_wallet_dao.to_wallet(
-                            result.into_iter().map(|m| {
-                            m.to_miner(matched_wallet_dao.club_name.clone())
+                        Ok(miner_result) => Some(matched_wallet_dao.to_wallet(
+                            miner_result.into_iter().map(|m| {
+                                m.to_miner(matched_wallet_dao.club_name.clone())
                         }).collect::<Vec<Miner>>())),
                         Err(_) => Some(matched_wallet_dao.to_wallet(vec![])),
                     }
@@ -120,7 +127,6 @@ pub fn fetch_wallet_by_id(_address: Uuid, conn: &DBPooledConnection) -> Option<W
         Err(_) => None,
     }
 }
-
 
 pub fn create_new_wallet(new_wallet_request: NewWalletRequest, conn: &DBPooledConnection) -> Result<Wallet, Error> {
     use crate::schema::wallets::dsl::*;

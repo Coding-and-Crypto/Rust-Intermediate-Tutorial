@@ -128,13 +128,13 @@ pub fn create_new_miner(new_miner_request: NewMinerRequest,
         id: Uuid::new_v4(),
         address: _address,
         nickname: new_miner_request.nickname,
-        hash_rate: rand::thread_rng().gen_range(20..100), //MH/s
+        hash_rate: rand::thread_rng().gen_range(20..100), // MH/s
         shares_mined: rand::thread_rng().gen_range(1..40),
     };
     match diesel::insert_into(miners).values(&new_miner_dao).execute(conn) {
         Ok(_) => match fetch_miner_by_id(new_miner_dao.id, conn) {
             Some(result) => Ok(result),
-            None => Err(Error::NotFound),
+            None => Err(Error::NotFound)
         },
         Err(e) => Err(e),
     }
