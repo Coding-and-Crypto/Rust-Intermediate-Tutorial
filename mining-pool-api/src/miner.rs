@@ -81,10 +81,14 @@ impl MinerDAO {
 }
 
 
+// --------------- Service Methods
+
+
 pub fn fetch_all_miners(conn: &DBPooledConnection) -> Vec<Miner> {
     use crate::schema::miners::dsl::*;
     use crate::schema::wallets::dsl::*;
-    match wallets.inner_join(miners)
+    match wallets
+        .inner_join(miners)
         .load::<(WalletDAO, MinerDAO)>(conn) {
         Ok(result) => {
             result.into_iter().map(|(w, m)| {
@@ -95,10 +99,12 @@ pub fn fetch_all_miners(conn: &DBPooledConnection) -> Vec<Miner> {
     }
 }
 
+
 pub fn fetch_miner_by_id(_id: Uuid, conn: &DBPooledConnection) -> Option<Miner> {
     use crate::schema::miners::dsl::*;
     use crate::schema::wallets::dsl::*;
-    match wallets.inner_join(miners)
+    match wallets
+        .inner_join(miners)
         .filter(id.eq(_id))
         .load::<(WalletDAO, MinerDAO)>(conn) {
         Ok(result) => {
@@ -113,6 +119,7 @@ pub fn fetch_miner_by_id(_id: Uuid, conn: &DBPooledConnection) -> Option<Miner> 
     }
 }
 
+
 pub fn create_new_miner(new_miner_request: NewMinerRequest,
                         _address: Uuid,
                         conn: &DBPooledConnection) -> Result<Miner, Error> {
@@ -121,7 +128,7 @@ pub fn create_new_miner(new_miner_request: NewMinerRequest,
         id: Uuid::new_v4(),
         address: _address,
         nickname: new_miner_request.nickname,
-        hash_rate: rand::thread_rng().gen_range(20..100), // MH/s
+        hash_rate: rand::thread_rng().gen_range(20..100), //MH/s
         shares_mined: rand::thread_rng().gen_range(1..40),
     };
     match diesel::insert_into(miners).values(&new_miner_dao).execute(conn) {
